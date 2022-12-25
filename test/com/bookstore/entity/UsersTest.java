@@ -3,7 +3,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-
+import com.bookstore.dao.UserDAO;
 import com.bookstore.entity.Users;
 
 public class UsersTest {
@@ -17,11 +17,9 @@ public class UsersTest {
 		EntityManagerFactory entityManagerFactory =  Persistence.createEntityManagerFactory("BookStoreWebsite");
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		
-		entityManager.getTransaction().begin();
+		UserDAO userDAO = new UserDAO(entityManager);
+		user1 = userDAO.create(user1);
 		
-		entityManager.persist(user1);
-		
-		entityManager.getTransaction().commit();
 		entityManager.close();
 		entityManagerFactory.close();
 		
