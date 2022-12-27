@@ -30,15 +30,8 @@ public class ListUsersServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		UserServices userServices = new UserServices();
-		
-		List<Users> listUsers =  userServices.listUser();
-		request.setAttribute("listUsers", listUsers);
-		
-		
-		String listPage = "user_list.jsp";
-		RequestDispatcher requestDispatcher =  request.getRequestDispatcher(listPage);
-		
-		requestDispatcher.forward(request, response);
+		userServices.listUser(request, response);
+
 	}
 
 

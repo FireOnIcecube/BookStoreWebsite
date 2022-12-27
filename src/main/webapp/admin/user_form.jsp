@@ -25,12 +25,12 @@
 				<td align="left"><input type="text" id="email" name="email" size="20" /></td>
 			</tr>
 			<tr>
-				<td align="right">Full name:</td>
+				<td align="right">Full name: </td>
 				<td align="left"><input type="text" id="fullname" name="fullname" size="20" /></td>
 			</tr>
 			
 			<tr>
-				<td align="right">Password:</td>
+				<td align="right">Password: </td>
 				<td align="left"><input type="password" id="password" name="password" size="20" /></td>
 			</tr>
 			<tr><td>&nbsp;</td></tr>
