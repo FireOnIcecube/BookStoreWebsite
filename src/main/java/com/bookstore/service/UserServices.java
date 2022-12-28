@@ -85,14 +85,53 @@ public class UserServices {
 
 	public void editUser() throws ServletException, IOException {
 		
-		Integer userId = Integer.parseInt(request.getParameter("id"));
-		Users user =  userDAO.get(userId);
+		int userId = Integer.parseInt(request.getParameter("id"));
+		Users user = userDAO.get(userId );
+
+		String destPage = "user_form.jsp";
 		
+		if (user == null) {
+			destPage = "message.jsp";
+			String errorMessage = "Could not find user with ID " + userId;
+			request.setAttribute("message", errorMessage);
+		} else {
+			request.setAttribute("user", user);			
+		}
 		
-		String editPage = "user_form.jsp";
-		request.setAttribute("user", user);
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher(editPage);
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher(destPage);
 		requestDispatcher.forward(request, response);
+	}
+
+
+	public void updateUser() throws ServletException, IOException {
+		int userId = Integer.parseInt(request.getParameter("userId")) ;
+		String email = request.getParameter("email");
+		String fullName = request.getParameter("fullname");
+		String password = request.getParameter("password");
+		
+		Users userById = userDAO.get(userId);
+		
+		Users userByEmail = userDAO.findByEmail(email);
+		
+		if(userByEmail != null && userByEmail.getUserId() != userById.getUserId()) {
+			
+			String message = "Could not update user. User with email "+ email +" already exists.";
+			request.setAttribute("message", message);
+			
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("message.jsp");
+			requestDispatcher.forward(request, response);
+			
+		}else {
+			Users user = new Users(userId,email,fullName,password);
+			userDAO.update(user);
+			
+			String message = "User has been updated successfully";
+			
+			listUser(message);
+		}
+		
+		
+		
 		
 	}
 }
