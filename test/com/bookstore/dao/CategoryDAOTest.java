@@ -2,6 +2,8 @@ package com.bookstore.dao;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -31,8 +33,12 @@ public class CategoryDAOTest extends BaseDAOTest {
 
 	@Test
 	public void testCreateCategory() {
-		Category newCat = new Category("Java Core");
-		Category category =  categoryDao.create(newCat);
+		Category newCat = new Category("Gaming");
+		Category category =  categoryDao.findByName(newCat.getName());
+		
+		if(category != null)
+		{
+		}
 		
 		System.out.println("-=----------------------------------");
 		System.out.println(category);
@@ -60,18 +66,36 @@ public class CategoryDAOTest extends BaseDAOTest {
 	}
 
 	@Test
-	public void testDeleteObject() {
-		fail("Not yet implemented");
+	public void testDeleteCategory() {
+		Integer catId = 5;
+		categoryDao.delete(catId);
+		
+		Category cat = categoryDao.get(catId);
+		
+		assertNull(cat);
 	}
 
 	@Test
 	public void testListAll() {
-		fail("Not yet implemented");
+		List<Category> listCategory = categoryDao.listAll(); 
+		
+		listCategory.forEach(c -> System.out.println(c.getName()));
+		
+		assertTrue(listCategory.size()>0);
 	}
 
 	@Test
 	public void testCount() {
-		fail("Not yet implemented");
+		long totalCategories = categoryDao.count();
+		assertEquals(totalCategories, 4);
+	}
+	
+	@Test
+	public void testfindByName() {
+		
+		Category category = categoryDao.findByName("gaming");
+		
+		assertNotNull(category);
 	}
 
 }
