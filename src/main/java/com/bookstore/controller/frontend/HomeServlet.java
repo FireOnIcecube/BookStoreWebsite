@@ -29,7 +29,6 @@ public class HomeServlet extends BaseServlet {
 
 		CategoryDAO categoryDAO = new CategoryDAO(entityManager);
 		List<Category> listCategory  = categoryDAO.listAll();
-		System.out.println(listCategory.toString());
 		request.setAttribute("listCategory", listCategory);
 		
 		String  homepage = "frontend/index.jsp";
