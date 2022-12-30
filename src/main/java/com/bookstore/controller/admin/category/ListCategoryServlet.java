@@ -25,7 +25,6 @@ public class ListCategoryServlet extends BaseServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().println("jfdiosjaoiejf");
 		
 		CategoryServices categoryServices =new CategoryServices(entityManager,request,response);
 		categoryServices.listCategory();
