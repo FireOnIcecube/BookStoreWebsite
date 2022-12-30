@@ -74,8 +74,9 @@
 
 
 	<jsp:directive.include file='footer.jsp' />
-	</body>
-<script type="text/javascript">
+	
+	
+	<script type="text/javascript">
 
 	$(document).ready(function(){
 		$('#userForm').validate({
@@ -107,4 +108,7 @@
 	
 
 </script>
+	
+	</body>
+
 </html>
