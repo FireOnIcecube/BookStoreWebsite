@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 23, 2022 at 07:40 PM
+-- Generation Time: Jan 01, 2023 at 09:24 AM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -69,6 +69,14 @@ CREATE TABLE `category` (
   `name` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`category_id`, `name`) VALUES
+(1, 'Core Java'),
+(2, 'Advanced Java');
+
 -- --------------------------------------------------------
 
 --
@@ -126,7 +134,7 @@ CREATE TABLE `review` (
 CREATE TABLE `users` (
   `user_id` int(11) NOT NULL,
   `email` varchar(30) NOT NULL,
-  `password` varchar(16) NOT NULL,
+  `password` varchar(32) NOT NULL,
   `full_name` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -135,7 +143,13 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `email`, `password`, `full_name`) VALUES
-(1, 'z03888648@gmail.com', 'password', 'FireOnIcecube');
+(1, 'nam@codejava.net', '8672500e7cb6fb058e20ab5da265406b', 'Nam Ha Bin'),
+(2, 'nam@codejava.net', 'helloworld', 'Nam Ha Minh'),
+(3, 'sophia@robotics.com', '123456', 'Miss Sophia'),
+(5, 'david@gmail.com', '6de54cc8c5070245d1003e136f311159', 'David Beckham'),
+(6, 'test@gmail.com', '2222', 'Test TT'),
+(7, 'test2@gmail.com', '33333', 'Test TT2'),
+(8, 'test3@gmail.com', '4444', 'Test TT3');
 
 --
 -- Indexes for dumped tables
@@ -216,7 +230,7 @@ ALTER TABLE `book_order`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `customer`
@@ -234,7 +248,7 @@ ALTER TABLE `review`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables

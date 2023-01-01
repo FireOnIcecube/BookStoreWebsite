@@ -16,7 +16,6 @@ import com.bookstore.entity.Users;
 
 public class UserServices {
 
-	private EntityManager entityManager;
 	private UserDAO userDAO;
 	private HttpServletRequest request;
 	private HttpServletResponse response;
@@ -24,7 +23,6 @@ public class UserServices {
 	public UserServices(EntityManager entityManager,HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
 		this.response = response;
-		this.entityManager = entityManager;
 
 		userDAO = new UserDAO(entityManager);
 	}
@@ -86,6 +84,10 @@ public class UserServices {
 			String errorMessage = "Could not find user with ID " + userId;
 			request.setAttribute("message", errorMessage);
 		} else {
+			
+			
+			user.setPassword(null);
+			
 			request.setAttribute("user", user);
 		}
 
@@ -112,11 +114,18 @@ public class UserServices {
 			requestDispatcher.forward(request, response);
 
 		} else {
-			Users user = new Users(userId, email, fullName, password);
-			userDAO.update(user);
+			
+			userById.setEmail(email);
+			userById.setFullName(fullName);
+			
+			if(password != null & !password.isEmpty()) {
+				String encrptedPassword =HashGenerator.generateMD5(password);
+				userById.setPassword(encrptedPassword);
+			}
+			
+			userDAO.update(userById);
 
 			String message = "User has been updated successfully";
-
 			listUser(message);
 		}
 

@@ -86,7 +86,11 @@
 					email:true
 				},
 				fullname:"required",
-				password:"required",
+				
+				<c:if test="${user == null}">
+					password:"required"
+				</c:if>
+				
 			},
 			
 			messages:{
@@ -96,7 +100,10 @@
 					email:"Please enter an valid email address"
 				},
 				fullname:"Please enter full name",
-				password:"Please enter password",
+				
+				<c:if test="${user == null}">
+					password:"Please enter password"
+				</c:if>
 			}
 		});
 		
