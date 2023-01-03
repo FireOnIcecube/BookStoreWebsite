@@ -83,6 +83,7 @@ public class UserServices {
 			destPage = "message.jsp";
 			String errorMessage = "Could not find user with ID " + userId;
 			request.setAttribute("message", errorMessage);
+			
 		} else {
 			
 			

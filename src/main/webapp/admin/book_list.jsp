@@ -57,7 +57,7 @@
 				<td>${book.author}</td>
 				<td>${book.category.name}</td>
 				<td>${book.price}</td>
-				<td>${book.lastUpdatedTime}</td>
+				<td>${book.lastUpdateTime}</td>
 				
 
 				<td>

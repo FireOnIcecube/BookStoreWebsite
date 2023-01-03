@@ -7,8 +7,13 @@
 		<meta charset="UTF-8">
 		<title>Create New Book</title>
 		<link rel="stylesheet" href="../css/style.css">
+		<link rel="stylesheet" href="../css/jquery-ui.min.css">
+		
 		<script type="text/javascript" src="../js/jquery-3.6.3.min.js"></script>
 		<script type="text/javascript" src="../js/jquery.validate.min.js"></script>
+
+		<script type="text/javascript" src="../js/jquery-ui.min.js"></script>
+		
 	</head>
 	<body>
 		<jsp:directive.include file="header.jsp" />
@@ -36,7 +41,7 @@
 		</c:if>
 		
 		<c:if test="${book ==null }">
-			<form action="create_book" method="post" id="bookForm" >
+			<form action="create_book" method="post" id="bookForm" enctype="multipart/form-data" >
 		</c:if>
 		
 		<table  class="form">
@@ -76,7 +81,10 @@
 			
 			<tr>
 				<td align="right">Book Image: </td>
-				<td align="left"><input type="file" id="bookImage" name="bookImage" size="20" /></td>
+				<td align="left">
+					<input type="file" id="bookImage" name="bookImage" size="20" /><br/>
+					<img id="thumbnail" alt="Image Preview" style="width:20%; margin-top: 10px" />
+				</td>
 			</tr>
 			
 			<tr>
@@ -87,7 +95,7 @@
 			<tr>
 				<td align="right">Description: </td>
 				<td align="left">
-					<textarea row="5" col="50" name="description" id="description"></textarea>
+					<textarea rows="5" cols="50" name="description" id="description"></textarea>
 				</td>
 			</tr>
 			
@@ -116,31 +124,35 @@
 	<script type="text/javascript">
 
 	$(document).ready(function(){
-		$('#userForm').validate({
+		
+		$('#publishDate').datepicker();
+		$('#bookImage').change(function(){
+			showImageThumbnail(this);
+		});
+		
+		$('#bookForm').validate({
 			rules:{
-				email:{
-					required:true,
-					email:true
-				},
-				fullname:"required",
-				
-				<c:if test="${user == null}">
-					password:"required"
-				</c:if>
+				category:"required",
+				title:"required",
+				author:"required",
+				isbn:"required",
+				publishDate:"required",
+				bookImage:"required",
+				price:"required",
+				description:"required",
 				
 			},
 			
 			messages:{
 				
-				email:{
-					required:"Please enter email",
-					email:"Please enter an valid email address"
-				},
-				fullname:"Please enter full name",
-				
-				<c:if test="${user == null}">
-					password:"Please enter password"
-				</c:if>
+				category:"Please select a category for the book",
+				title:"Please enter title of the book",
+				author:"Please enter author of the book",
+				isbn:"Please enter ISBN of the book",
+				publishDate:"Please enter publish date of the book",
+				bookImage:"Please choose an Image of the book",
+				price:"Please enter price of the book",
+				description:"Please enter description of the book",
 			}
 		});
 		
@@ -150,6 +162,17 @@
 		
 	});
 	
+	function showImageThumbnail(fileInput){
+		let file =  fileInput.files[0];
+		
+		let reader = new FileReader();
+		
+		reader.onload = function(e){
+			$('#thumbnail').attr('src',e.target.result);
+		}
+		
+		reader.readAsDataURL(file);
+	}
 
 </script>
 	
