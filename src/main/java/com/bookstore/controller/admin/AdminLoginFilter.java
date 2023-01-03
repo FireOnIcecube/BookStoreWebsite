@@ -44,11 +44,12 @@ public class AdminLoginFilter implements Filter {
 		
 		if(loggedIn && (loginRequest || loginPage)) {
 			
+			
+			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/");
 			dispatcher.forward(request, response);
 			
 		}else if(loggedIn || loginRequest) {
-			System.out.println("user logged in");
 			// pass the request along the filter chain
 			chain.doFilter(request, response);
 		}else {
