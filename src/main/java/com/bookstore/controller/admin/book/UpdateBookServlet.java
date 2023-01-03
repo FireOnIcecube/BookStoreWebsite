@@ -11,21 +11,28 @@ import javax.servlet.http.HttpServletResponse;
 import com.bookstore.controller.BaseServlet;
 import com.bookstore.service.BookServices;
 
-
-@WebServlet("/admin/edit_book")
-
-public class EditBookServlet extends BaseServlet {
+/**
+ * Servlet implementation class UpdateBookServlet
+ */
+@WebServlet("/admin/update_book")
+@MultipartConfig(
+		fileSizeThreshold = 1024*10, //10KB
+		maxFileSize = 1024 * 300, 	 //300KB
+		maxRequestSize = 1024*1024	 //1MB
+)
+public class UpdateBookServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
 
 
-    public EditBookServlet() {
-
+    public UpdateBookServlet() {
+        // TODO Auto-generated constructor stub
     }
 
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		BookServices bookServices = new BookServices(entityManager,request,response);
-		bookServices.editBook();
+		bookServices.updateBook();
 	}
 
 }

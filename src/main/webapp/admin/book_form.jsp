@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html;"
     pageEncoding="UTF-8"%>
      <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -36,11 +37,11 @@
 	<div align='center'>
 	
 		<c:if test="${book != null}">
-			<form action="update_user" method="post" id="bookForm" enctype="multipart/form-data">
+			<form action="update_book" method="post" id="bookForm" enctype="multipart/form-data">
 			<input type="hidden" name="bookId" value="${book.bookId}"/>
 		</c:if>
 		
-		<c:if test="${book ==null }">
+		<c:if test="${book == null }">
 			<form action="create_book" method="post" id="bookForm" enctype="multipart/form-data" >
 		</c:if>
 		
@@ -86,7 +87,9 @@
 			
 			<tr>
 				<td align="right">Publish Date: </td>
-				<td align="left"><input type="text" id="publishDate" name="publishDate" size="20" value="${book.publishDate}" /></td>
+				<td align="left"><input type="text" id="publishDate" name="publishDate" size="20" 
+					value="<fmt:formatDate pattern='MM/dd/yyyy' value="${book.publishDate}"/> " />
+				</td>
 			</tr>
 			
 			<tr>
@@ -116,7 +119,7 @@
 				
 				<td colspan="2" align="center">
 					<button type="submit">Save</button>&nbsp;&nbsp;&nbsp;
-					<button id="buttonCancel">Cancel</button>  
+					<button type="button" id="buttonCancel">Cancel</button>  
 				</td>
 			</tr>
 			
@@ -149,7 +152,11 @@
 				author:"required",
 				isbn:"required",
 				publishDate:"required",
-				bookImage:"required",
+				
+				<c:if test="${book==null}">
+					bookImage:"required",
+				</c:if>
+				
 				price:"required",
 				description:"required",
 				

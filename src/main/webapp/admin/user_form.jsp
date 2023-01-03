@@ -59,7 +59,7 @@
 				
 				<td colspan="2" align="center">
 					<button type="submit">Save</button>&nbsp;&nbsp;&nbsp;
-					<button id="buttonCancel">Cancel</button>  
+					<button type="button" id="buttonCancel">Cancel</button>  
 				</td>
 			</tr>
 			
