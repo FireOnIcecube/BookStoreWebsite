@@ -144,16 +144,25 @@ public class BookServices {
 	
 
 	public void editBook() throws ServletException, IOException {
-		Integer bookId =  Integer.parseInt(request.getParameter("id"));
-		Book book =  bookDAO.get(bookId);
-		List<Category> listCategory =categoryDAO.listAll();
+		Integer bookId = Integer.parseInt(request.getParameter("id"));
+		Book book = bookDAO.get(bookId);
+		String destPage = "book_form.jsp";
 		
-		request.setAttribute("book", book);
-		request.setAttribute("listCategory", listCategory);
+		if (book != null) {
+			List<Category> listCategory = categoryDAO.listAll();
+			
+			request.setAttribute("book", book);
+			request.setAttribute("listCategory", listCategory);
+			
+		} else {
+			destPage = "message.jsp";
+			String message = "Could not find book with ID " + bookId;
+			request.setAttribute("message", message);			
+		}
 		
-		String  editPage = "book_form.jsp";
-		RequestDispatcher requestDispatcher  = request.getRequestDispatcher(editPage);
-		requestDispatcher.forward(request, response);
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher(destPage);
+		requestDispatcher.forward(request, response);		
+		
 		
 	}
 
@@ -184,6 +193,25 @@ public class BookServices {
 		
 		String message = "The book has been updated successfully.";
 		listBooks(message);
+	}
+
+
+	public void deleteBook() throws ServletException, IOException {
+		Integer bookId = Integer.parseInt(request.getParameter("id"));
+		Book book =  bookDAO.get(bookId);
+		
+		if (book == null) {
+			String message = "Could not find book with ID " + bookId 
+					+ ", or it might have been deleted";
+			request.setAttribute("message", message);
+			request.getRequestDispatcher("message.jsp").forward(request, response);
+			
+		} else {
+			String message = "The book has been deleted successfully.";
+			bookDAO.delete(bookId);			
+			listBooks(message);		
+		}
+		
 	}
 	
 	

@@ -82,10 +82,10 @@
 			$(".deleteLink").each(function(){
 				$(this).on("click",function(){
 					
-					userId =$(this).attr("id");
+					bookId =$(this).attr("id");
 					
-					if(confirm('Are you sure you want to delete the user with ID ' +userId+'?')){
-						window.location.replace('delete_user?id='+ userId);
+					if(confirm('Are you sure you want to delete the book with ID ' +bookId+'?')){
+						window.location.replace('delete_book?id='+ bookId);
 						//window.location = 'delete_user';
 					}
 					
