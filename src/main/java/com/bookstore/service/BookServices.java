@@ -213,6 +213,32 @@ public class BookServices {
 		}
 		
 	}
+
+
+	public void listBookByCategory() throws ServletException, IOException {
+		int categoryId = Integer.parseInt(request.getParameter("id"));
+		Category category = categoryDAO.get(categoryId);
+		
+		
+		if (category == null) {
+			
+			String message = "Sorry, the category ID " + categoryId + " is not available.";
+			request.setAttribute("message", message);
+			request.getRequestDispatcher("frontend/message.jsp").forward(request, response);
+			
+			return;
+		}
+		
+		List<Book> listBooks = bookDAO.listByCategory(categoryId);
+		
+		request.setAttribute("listBooks", listBooks);
+		request.setAttribute("category", category);
+		
+		String listPage = "frontend/books_list_by_category.jsp";
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher(listPage);
+		requestDispatcher.forward(request, response);		
+		
+	}
 	
-	
+		
 }
