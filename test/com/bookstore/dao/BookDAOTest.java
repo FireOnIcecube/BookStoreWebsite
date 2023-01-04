@@ -15,6 +15,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Query;
+
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -156,6 +158,34 @@ public class BookDAOTest extends BaseDAOTest {
 		}
 		
 		assertEquals(listNewBooks.size(), 4);
+	}
+	
+	@Test
+	public void testSearchBookIntitle() {
+		String keyword = "Java";
+		List<Book> result = bookDao.search(keyword);
+	
+		
+		for(Book aBook:result) {
+			System.out.println(aBook.getTitle());
+
+		}
+		
+		assertEquals(4,result.size());
+	}
+	
+	@Test
+	public void testSearchBookInAuthor() {
+		String keyword = "Java";
+		List<Book> result = bookDao.search(keyword);
+	
+		
+		for(Book aBook:result) {
+			System.out.println(aBook.getTitle());
+
+		}
+		
+		assertEquals(2,result.size());
 	}
 	
 	
