@@ -20,8 +20,10 @@
 			<c:forEach items="${listBooks }" var="book">
 				<div style="float:left; display:inline-block; margin:20px">
 					<div>
-						<a href="view_book?id=${book.bookId}"></a>
-						<img src="data:image/jpg;base64,${book.base64Image}" width="128" height="164"/>
+						<a href="view_book?id=${book.bookId}">
+							<img src="data:image/jpg;base64,${book.base64Image}" width="128" height="164"/>
+						</a>
+						
 					</div>
 					<div>
 						<a href="view_book?id=${book.bookId}">
