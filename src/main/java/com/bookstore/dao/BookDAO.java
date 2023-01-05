@@ -10,9 +10,8 @@ import com.bookstore.entity.Book;
 
 public class BookDAO extends JpaDAO<Book> implements GenericDAO<Book> {
 
-	public BookDAO(EntityManager entityManager) {
-		super(entityManager);
-		// TODO Auto-generated constructor stub
+	public BookDAO() {
+
 	}
 
 	@Override
@@ -67,12 +66,8 @@ public class BookDAO extends JpaDAO<Book> implements GenericDAO<Book> {
 		return super.findWithNameQuery("Book.search","keyword",keyword);
 	}
 	
-	public List<Book> listNewBooks(){
-		Query query = entityManager.createNamedQuery("Book.listNew");
-		query.setFirstResult(0);
-		query.setMaxResults(4);
-		
-		return  query.getResultList();
+	public List<Book> listNewBooks(){		
+		return  super.findWithNameQuery("Book.listNew",0,4);
 		
 	}
 

@@ -91,3 +91,7 @@ input.error{
 	font-weight:bold;
 	margin: 5px;
 }
+
+div.center{
+	text-align: center;
+}

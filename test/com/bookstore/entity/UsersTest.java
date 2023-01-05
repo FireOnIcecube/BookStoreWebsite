@@ -17,7 +17,7 @@ public class UsersTest {
 		EntityManagerFactory entityManagerFactory =  Persistence.createEntityManagerFactory("BookStoreWebsite");
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		
-		UserDAO userDAO = new UserDAO(entityManager);
+		UserDAO userDAO = new UserDAO();
 		user1 = userDAO.create(user1);
 		
 		entityManager.close();

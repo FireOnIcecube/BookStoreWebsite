@@ -11,8 +11,7 @@ import com.bookstore.service.HashGenerator;
 
 public class UserDAO extends JpaDAO<Users> implements GenericDAO<Users> {
 
-	public UserDAO(EntityManager entityManager) {
-		super(entityManager);
+	public UserDAO() {
 		// TODO Auto-generated constructor stub
 	}
 

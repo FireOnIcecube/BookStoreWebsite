@@ -10,7 +10,7 @@
 
 	<jsp:directive.include file="header.jsp" />
 
-	<div align="center">
+	<div class ="center">
 		<table width="80%"style="border:0px">
 			<tr >
 				<td colspan="3" align="left">
