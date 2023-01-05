@@ -18,17 +18,19 @@
 		
 		<div align="center" style="width:80%; margin:0 auto;">
 			<c:forEach items="${listBooks }" var="book">
-				<div style="float:left; display:inline-block; margin:20px">
-					<div>
+				<div style="display:inline-block; margin:20px">
+					<div align="left">
 						<a href="view_book?id=${book.bookId}">
 							<img src="data:image/jpg;base64,${book.base64Image}" width="128" height="164"/>
 						</a>
 						
 					</div>
 					<div>
+						<h2>
 						<a href="view_book?id=${book.bookId}">
 							<b>${book.title}</b>
 						</a>
+						</h2>
 					</div>
 					<div>Rating *****</div>
 					<div>by ${book.author }</div>

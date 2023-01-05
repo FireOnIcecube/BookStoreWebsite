@@ -275,6 +275,7 @@ public class BookServices {
 			result = bookDAO.search(keyword);
 		}
 		
+		request.setAttribute("keyword", keyword);
 		request.setAttribute("result", result);
 		
 		String resultPage = "frontend/search_result.jsp";

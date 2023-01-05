@@ -162,7 +162,7 @@ public class BookDAOTest extends BaseDAOTest {
 	
 	@Test
 	public void testSearchBookIntitle() {
-		String keyword = "Java";
+		String keyword = "Kathy Sierra, Bert Bates";
 		List<Book> result = bookDao.search(keyword);
 	
 		
@@ -171,7 +171,7 @@ public class BookDAOTest extends BaseDAOTest {
 
 		}
 		
-		assertEquals(4,result.size());
+		assertEquals(1,result.size());
 	}
 	
 	@Test
