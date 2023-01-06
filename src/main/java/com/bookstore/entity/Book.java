@@ -34,6 +34,7 @@ import javax.persistence.UniqueConstraint;
 	@NamedQuery(name="Book.findAll",query = "SELECT b FROM Book b"),
 	@NamedQuery(name="Book.findByTitle",query ="SELECT b FROM Book b WHERE b.title = :title"),
 	@NamedQuery(name="Book.countAll",query="SELECT COUNT(b) FROM Book b"),
+	@NamedQuery(name="Book.countByCategory",query="SELECT COUNT(b) FROM Book b WHERE b.category.categoryId  = :catId"),
 	@NamedQuery(name="Book.findByCategory",query="SELECT b FROM Book b WHERE b.category.categoryId = :catId"),
 	@NamedQuery(name="Book.listNew",query="SELECT b FROM Book b ORDER BY b.publishDate DESC"),
 	@NamedQuery(name="Book.search",query="SELECT b FROM Book b WHERE b.title LIKE '%' || :keyword || '%'"

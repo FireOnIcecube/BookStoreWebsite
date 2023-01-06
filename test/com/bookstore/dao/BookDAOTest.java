@@ -189,6 +189,24 @@ public class BookDAOTest  {
 	
 	
 	@Test
+	public void testListByCategory() {
+		int categoryId = 2;
+		
+		List<Book> listBooks = bookDao.listByCategory(categoryId);
+		
+		assertTrue(listBooks.size() > 0);
+	}
+	
+	@Test
+	public void testCountByCategory() {
+		int categoryId = 2;
+		
+		long numOfBooks = bookDao.countByCategory(categoryId);
+		
+		assertEquals(numOfBooks, 3);;
+	}
+	
+	@Test
 	public void testFindByCategory() {
 		int categoryId = 5;
 		

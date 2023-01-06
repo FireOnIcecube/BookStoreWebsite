@@ -2,7 +2,10 @@
 <div align='center'>
 
 	<div>
-		<img src='../images/BookstoreAdminLogo.png' />
+		<a href="${pageContext.request.contextPath }/admin/">
+			<img src='../images/BookstoreAdminLogo.png' />
+		</a>
+		
 	</div>
 	
 	<div>

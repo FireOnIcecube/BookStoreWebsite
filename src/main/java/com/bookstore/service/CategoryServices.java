@@ -3,16 +3,13 @@ package com.bookstore.service;
 import java.io.IOException;
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.bookstore.dao.BookDAO;
 import com.bookstore.dao.CategoryDAO;
-import com.bookstore.dao.UserDAO;
 import com.bookstore.entity.Category;
 
 public class CategoryServices {
@@ -117,6 +114,11 @@ public class CategoryServices {
 		String message;
 
 		Category category = categoryDAO.get(categoryId);
+		
+		BookDAO bookDAO = new BookDAO();
+		long numberOfBooks = bookDAO.countByCategory(categoryId);
+		
+		
 
 		if (category == null) {
 			message = "Could not find category with ID " + categoryId + ", or it might have been deleted";
@@ -124,8 +126,16 @@ public class CategoryServices {
 			request.getRequestDispatcher("message.jsp").forward(request, response);
 			return;
 		} else {
-			message = "delete category with ID " + categoryId+ " successfully.";
-			categoryDAO.delete(categoryId);
+			
+			if(numberOfBooks >0) {
+				message = "Could not delete the category (ID: %d) because it  currently contains some books";
+				message=String.format(message, categoryId);
+			}else {
+				categoryDAO.delete(categoryId);
+				message = "delete category with ID " + categoryId+ " successfully.";
+			}
+			
+			
 			listCategory(message);
 
 		}
