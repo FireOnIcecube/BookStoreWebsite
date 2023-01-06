@@ -14,6 +14,7 @@ import com.bookstore.dao.BookDAO;
 import com.bookstore.dao.CategoryDAO;
 import com.bookstore.entity.Book;
 import com.bookstore.entity.Category;
+import com.bookstore.service.CommonUtitlity;
 
 /**
  * Servlet implementation class HomeServlet
@@ -38,6 +39,8 @@ public class HomeServlet extends HttpServlet {
 		String  homepage = "frontend/index.jsp";
 		RequestDispatcher dispatcher =  request.getRequestDispatcher(homepage);
 		dispatcher.forward(request, response);
+		
+
 	}
 
 
