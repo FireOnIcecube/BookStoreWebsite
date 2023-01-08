@@ -7,7 +7,6 @@
 <title>Manage Categories - Evergreen Bookstore Adminstration</title>
 	<link rel="stylesheet" href="../css/style.css">
 	<script type="text/javascript" src="../js/jquery-3.6.3.min.js"></script>
-		<script type="text/javascript" src="../js/jquery.validate.min.js"></script>
 </head>
 <body>
 	<jsp:directive.include file="header.jsp" />

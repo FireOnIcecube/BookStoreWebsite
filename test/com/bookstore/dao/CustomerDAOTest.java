@@ -85,5 +85,15 @@ public class CustomerDAOTest {
 		
 		assertEquals(listCustomers.size(), 2);
 	}
+	
+	@Test
+	public void testFindByEmail() {
+		String email="tom@gmal.com";
+		
+		Customer customer = customerDao.findByEmail(email);
+		
+		assertNotNull(customer);
+		
+	}
 
 }
