@@ -16,9 +16,9 @@ public class CustomerDAO extends JpaDAO<Customer> implements GenericDAO<Customer
 	}
 
 	@Override
-	public Customer update(Customer t) {
+	public Customer update(Customer customer) {
 		// TODO Auto-generated method stub
-		return null;
+		return super.update(customer);
 	}
 
 	@Override

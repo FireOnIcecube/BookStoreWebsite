@@ -74,10 +74,10 @@
 			$(".deleteLink").each(function(){
 				$(this).on("click",function(){
 					
-					bookId =$(this).attr("id");
+					customerId =$(this).attr("id");
 					
-					if(confirm('Are you sure you want to delete the book with ID ' +bookId+'?')){
-						window.location.replace('delete_book?id='+ bookId);
+					if(confirm('Are you sure you want to delete the customer with ID ' +customerId+'?')){
+						window.location.replace('delete_customer?id='+ customerId);
 						//window.location = 'delete_user';
 					}
 					
