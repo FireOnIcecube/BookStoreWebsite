@@ -225,6 +225,20 @@ public class CustomerServices {
 		RequestDispatcher dispatcher = request.getRequestDispatcher(profilePage);
 		dispatcher.forward(request, response);
 	}
+
+	public void showCustomerProfileEditForm() throws ServletException, IOException {
+		String  editPage = "frontend/edit_profile.jsp";
+		RequestDispatcher dispatcher= request.getRequestDispatcher(editPage);
+		dispatcher.forward(request, response);
+	}
+
+	public void updateCustomerProfile() throws ServletException, IOException {
+		Customer customer = (Customer)request.getSession().getAttribute("loggedCustomer");
+		updateCustomerFieldsFromForm(customer);
+		customerDAO.update(customer);
+		showCustomerProfile();
+		
+	}
 	
 	
 	

@@ -15,7 +15,10 @@ import javax.servlet.http.HttpSession;
 
 @WebFilter("/*")
 public class CustomerLoginFilter implements Filter {
-
+	private static final String[] loginRequiredURLs = {
+			"/view_profile","/edit_profile","/update_profile"
+	};
+	
     public CustomerLoginFilter() {
         // TODO Auto-generated constructor stub
     }
@@ -38,11 +41,12 @@ public class CustomerLoginFilter implements Filter {
 		
 		boolean loggedIn = session != null && session.getAttribute("loggedCustomer") !=null;
 		
+		String requestURL = httpRequest.getRequestURL().toString();
 		System.out.println("Path: " + path);
 		System.out.println("loggedIn: " + loggedIn);
 		
 		
-		if(!loggedIn && path.startsWith("/view_profile")) {
+		if(!loggedIn && isLoginRequired(requestURL)) {
 			String loginPage = "frontend/login.jsp";
 			
 			RequestDispatcher dispatcher = httpRequest.getRequestDispatcher(loginPage);
@@ -52,6 +56,17 @@ public class CustomerLoginFilter implements Filter {
 			chain.doFilter(request, response);
 		}
 		
+	}
+	
+	private boolean isLoginRequired(String requestURL)
+	{
+		for(String loginRequiredURL :loginRequiredURLs ) {
+			if(requestURL.contains(loginRequiredURL)) {
+				return true;
+			}
+		}
+		
+		return false;
 	}
 
 	public void init(FilterConfig fConfig) throws ServletException {
