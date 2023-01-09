@@ -180,6 +180,34 @@ public class CustomerServices {
 		
 		
 	}
+
+	public void showLogin() throws ServletException, IOException {
+		String loginPage = "frontend/login.jsp";
+		RequestDispatcher dispatcher = request.getRequestDispatcher(loginPage);
+		dispatcher.forward(request, response);
+		
+	}
+
+	public void doLogin() throws ServletException, IOException {
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
+		
+		Customer customer = customerDAO.checkLogin(email, password);
+		
+		if(customer == null) {
+			String message = "Login failed. Please check your email and password.";
+			request.setAttribute("message", message);
+			showLogin();
+			
+		}else {
+			request.getSession().setAttribute("loggedCustomer", customer);
+			
+			String profilePage = "frontend/customer_profile.jsp";
+			RequestDispatcher dispatcher = request.getRequestDispatcher(profilePage);
+			dispatcher.forward(request, response);
+		}
+		
+	}
 	
 	
 	
