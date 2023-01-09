@@ -13,6 +13,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.bookstore.entity.Customer;
+import com.bookstore.service.HashGenerator;
 
 public class CustomerDAOTest {
 
@@ -113,6 +114,12 @@ public class CustomerDAOTest {
 		Customer customer = customerDao.checkLogin(email, password);
 		
 		assertNull(customer);
+	}
+	
+	@Test
+	public void testHashGenerator() {
+		
+		
 	}
 
 }

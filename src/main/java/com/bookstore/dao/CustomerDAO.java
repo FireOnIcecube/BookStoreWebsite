@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.bookstore.entity.Customer;
+import com.bookstore.service.HashGenerator;
 
 public class CustomerDAO extends JpaDAO<Customer> implements GenericDAO<Customer> {
 
@@ -57,15 +58,15 @@ public class CustomerDAO extends JpaDAO<Customer> implements GenericDAO<Customer
 		return null;
 	}
 	
-	public Customer checkLogin(String email,String password) {
-		
-		Map<String,Object> parameters =  new HashMap<>();
+	public Customer checkLogin(String email, String password) {
+		Map<String, Object> parameters = new HashMap<>();
+		String encryptedPassword = HashGenerator.generateMD5(password);
 		parameters.put("email", email);
-		parameters.put("pass",password);
+		parameters.put("pass", encryptedPassword);
 		
-		List<Customer> result = super.findWithNameQuery("Customer.checkLogin",parameters);
+		List<Customer> result = super.findWithNameQuery("Customer.checkLogin", parameters);
 		
-		if(!result.isEmpty()) {
+		if (!result.isEmpty()) {
 			return result.get(0);
 		}
 		

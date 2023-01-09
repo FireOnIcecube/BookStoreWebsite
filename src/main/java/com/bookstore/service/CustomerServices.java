@@ -77,10 +77,18 @@ public class CustomerServices {
 		String  zipCode = request.getParameter("zipCode");
 		String  country = request.getParameter("country");
 		
+		if(email != null && !email.equals("")) {
+			customer.setEmail(email);
+		}
 		
-		customer.setEmail(email);
 		customer.setFullname(fullName);
-		customer.setPassword(password);
+		
+		if (password != null & !password.isEmpty()) {
+			String encryptedPassword = HashGenerator.generateMD5(password);
+			customer.setPassword(encryptedPassword);				
+		}		
+		
+		
 		customer.setPhone(phone);
 		customer.setAddress(address);
 		customer.setCity(city);
@@ -120,12 +128,17 @@ public class CustomerServices {
 		
 		String destPage = "customer_form.jsp";
 		
-		if (customer != null) {
-			request.setAttribute("customer", customer);
-		} else {
+		if (customer == null) {
+			
 			String message = "Could not find customer with ID " + customerId;
 			request.setAttribute("message", message);
 			destPage = "message.jsp";
+			
+			request.setAttribute("customer", customer);
+			
+		} else {
+			customer.setPassword(null);
+			request.setAttribute("customer", customer);
 		}
 		
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(destPage);
@@ -202,11 +215,15 @@ public class CustomerServices {
 		}else {
 			request.getSession().setAttribute("loggedCustomer", customer);
 			
-			String profilePage = "frontend/customer_profile.jsp";
-			RequestDispatcher dispatcher = request.getRequestDispatcher(profilePage);
-			dispatcher.forward(request, response);
+			showCustomerProfile();
 		}
 		
+	}
+	
+	public void showCustomerProfile() throws ServletException, IOException {
+		String profilePage = "frontend/customer_profile.jsp";
+		RequestDispatcher dispatcher = request.getRequestDispatcher(profilePage);
+		dispatcher.forward(request, response);
 	}
 	
 	

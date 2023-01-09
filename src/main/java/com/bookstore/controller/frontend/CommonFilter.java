@@ -25,9 +25,6 @@ public class CommonFilter implements Filter {
 	
     public CommonFilter() {
     	 categoryDAO = new CategoryDAO();
-    	 
- 		
- 		
     }
 
 	
@@ -44,7 +41,6 @@ public class CommonFilter implements Filter {
 		
 		if(!path.startsWith("/admin/"))
 		{
-			System.out.println("CommonFilter: "+ path);
 			
 			List<Category> listCategory = categoryDAO.listAll();
 			request.setAttribute("listCategory", listCategory);
