@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.bookstore.dao.CustomerDAO;
+import com.bookstore.dao.ReviewDAO;
 import com.bookstore.entity.Customer;
 
 public class CustomerServices {
@@ -177,18 +178,29 @@ public class CustomerServices {
 		String message ;
 		
 		
-		if(customer == null) {
+		if(customer != null) {
+			ReviewDAO reviewDAO = new ReviewDAO();
+			long reviewCount = reviewDAO.countByCustomer(customerId);
+			
+			if(reviewCount == 0) {
+				customerDAO.delete(customerId);
+				
+				message="The customer has been deleted successfully.";
+				listCustomers(message);
+			}else {
+				message = "Could not delete customer with ID " + customerId
+						+ " because he/she posted reviews for books.";
+				
+				request.setAttribute("message", message);
+				request.getRequestDispatcher("message.jsp").forward(request, response);
+			}
+			
+		}else {
 			message = "Could not find customer with ID " + customerId 
 					+ ", or it might have been deleted";
 			
 			request.setAttribute("message", message);
 			request.getRequestDispatcher("message.jsp").forward(request, response);
-		}else {
-			
-			customerDAO.delete(customerId);
-			
-			message="The customer has been deleted successfully.";
-			listCustomers(message);
 		}
 		
 		

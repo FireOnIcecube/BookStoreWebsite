@@ -205,9 +205,20 @@ public class BookServices {
 			request.getRequestDispatcher("message.jsp").forward(request, response);
 			
 		} else {
-			String message = "The book has been deleted successfully.";
-			bookDAO.delete(bookId);			
-			listBooks(message);		
+			
+			if(!book.getReviews().isEmpty()) {
+				String message = "Could not delete the book with ID " + bookId
+						+ " because it has reviews";
+				
+				request.setAttribute("message", message);
+				request.getRequestDispatcher("message.jsp").forward(request, response);
+			}else {
+				String message = "The book has been deleted successfully.";
+				bookDAO.delete(bookId);			
+				listBooks(message);		
+			}
+			
+			
 		}
 		
 	}
