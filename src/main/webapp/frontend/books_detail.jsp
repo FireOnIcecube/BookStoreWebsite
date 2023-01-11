@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <title>${book.title}-Online Books Store</title>
 <link rel="stylesheet" href="css/style.css">
+<script type="text/javascript" src="js/jquery-3.6.3.min.js"></script>
 </head>
 <body>
 
@@ -29,7 +30,7 @@
 				<td valign="top" rowspan="2" width="20%">
 					<h2>$${book.price}</h2>
 					<br/>
-					<button type="submit">Add to Cart</button>
+					<button id="buttonAddToCart">Add to Cart</button>
 				</td>
 			</tr>
 			<tr>
@@ -49,6 +50,15 @@
 	</div>
 
 	<jsp:directive.include file='footer.jsp' />
+	<script type="text/javascript">
+		$(document).ready(function(){
+			
+			$("#buttonAddToCart").click(function(){
+				window.location.replace('add_to_cart?book_id=' + ${book.bookId});
+			});
+			
+		});
+	</script>
 
 </body>
 </html>

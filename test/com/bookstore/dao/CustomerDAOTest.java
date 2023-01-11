@@ -118,7 +118,11 @@ public class CustomerDAOTest {
 	
 	@Test
 	public void testHashGenerator() {
-		
+		System.out.println(HashGenerator.generateMD5("secret"));
+		System.out.println(HashGenerator.generateMD5("secret"));
+		System.out.println(HashGenerator.generateMD5("secret"));
+		System.out.println(HashGenerator.generateMD5("secret"));
+		System.out.println(HashGenerator.generateMD5("secret"));
 		
 	}
 

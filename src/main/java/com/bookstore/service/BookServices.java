@@ -75,7 +75,7 @@ public class BookServices {
 		Book existBook = bookDAO.findByTitle(title);
 		
 		if(existBook != null) {
-			String  message = "Could not  create new book because the title "+ title +" already exists.";
+			String  message = "Could not create new book because the title "+ title +" already exists.";
 			listBooks(message);
 			return;
 		}

@@ -60,7 +60,7 @@
 				<tr>
 					<td align="right">Address:</td>
 					<td align="left"><input type="text" id="address"
-						name="address" size="45" " /></td>
+						name="address" size="45"  /></td>
 				</tr>
 
 				<tr>
