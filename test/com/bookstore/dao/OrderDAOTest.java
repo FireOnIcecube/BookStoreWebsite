@@ -1,6 +1,6 @@
 package com.bookstore.dao;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.HashSet;
@@ -14,7 +14,6 @@ import com.bookstore.entity.Book;
 import com.bookstore.entity.BookOrder;
 import com.bookstore.entity.Customer;
 import com.bookstore.entity.OrderDetail;
-import com.bookstore.entity.OrderDetailId;
 
 public class OrderDAOTest {
 
@@ -47,20 +46,15 @@ public class OrderDAOTest {
 		
 		Book book = new Book(2);
 		orderDetail.setBook(book);
-		
-		OrderDetailId orderDetailId = new OrderDetailId();
-		
-		orderDetailId.setQuantity(2);
-		orderDetailId.setSubtotal(80f);
-		
-		orderDetail.setId(orderDetailId);
+		orderDetail.setQuantity(2);
+		orderDetail.setSubtotal(80f);
 		
 		orderDetails.add(orderDetail);
 		
 		order.setOrderDetails(orderDetails);
 		BookOrder savedOrder =  orderDAO.create(order);
 		
-		assertNotNull(savedOrder);
+		assertTrue(savedOrder != null && savedOrder.getOrderDetails().size()>0);
 	}
 
 	@Test
