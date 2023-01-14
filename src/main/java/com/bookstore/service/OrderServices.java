@@ -41,12 +41,19 @@ public class OrderServices {
 
 	public void viewOrderDetailForAdmin() throws ServletException, IOException {
 		int orderId = Integer.parseInt(request.getParameter("id"));
-		
 		BookOrder order =  orderDAO.get(orderId);
-		request.setAttribute("order", order);
+		String destPage = "order_detail.jsp";
 		
-		String	detailPage = "order_detail.jsp";
-		RequestDispatcher dispatcher = request.getRequestDispatcher(detailPage);
+		if(order != null) {
+			request.setAttribute("order", order);
+		}else {
+			
+			destPage = "message.jsp";
+			String message = "Could not find order with ID " + orderId;
+			request.setAttribute("message", message);
+		}
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher(destPage);
 		dispatcher.forward(request, response);
 	}
 }
