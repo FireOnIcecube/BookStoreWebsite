@@ -94,7 +94,7 @@
 								<td><button type="button" id="clearCart">Clear Cart</button></td>
 								<td><a href="${pageContext.request.contextPath}">Continue
 										Shopping</a></td>
-								<td><a href="">Checkout</a></td>
+								<td><a href="checkout">Checkout</a></td>
 							</tr>
 
 						</table>

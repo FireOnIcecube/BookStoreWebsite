@@ -36,6 +36,8 @@ public class HomeServlet extends HttpServlet {
 		
 		request.setAttribute("listNewBooks", listNewBooks);
 		
+		
+		
 		String  homepage = "frontend/index.jsp";
 		RequestDispatcher dispatcher =  request.getRequestDispatcher(homepage);
 		dispatcher.forward(request, response);
