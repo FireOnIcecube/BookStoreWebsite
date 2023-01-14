@@ -139,4 +139,50 @@ public class OrderServices {
 		dispatcher.forward(request, response);
 		
 	}
+
+
+
+	public void listOrderByCustomer() throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		Customer customer = (Customer) session.getAttribute("loggedCustomer");
+		List<BookOrder> listOrders = orderDAO.listByCustomer(customer.getCustomerId());
+		
+		request.setAttribute("listOrders", listOrders);
+		
+		String historyPage = "frontend/order_list.jsp";
+		RequestDispatcher dispatcher = request.getRequestDispatcher(historyPage);
+		dispatcher.forward(request, response);
+	}
+
+
+
+	public void showOrderDetailForCustomer() throws ServletException, IOException {
+		int orderId = Integer.parseInt(request.getParameter("id"));
+		
+		HttpSession session = request.getSession();
+		Customer customer = (Customer) session.getAttribute("loggedCustomer");
+		
+		
+		
+		
+		BookOrder order =  orderDAO.get(orderId,customer.getCustomerId());
+		
+		
+		String destPage = "frontend/order_detail.jsp";
+		
+		
+		
+		if(order != null) {
+			request.setAttribute("order", order);
+		}else {
+			
+			destPage = "frontend/message.jsp";
+			String message = "Could not find order with ID " + orderId;
+			request.setAttribute("message", message);
+		}
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher(destPage);
+		dispatcher.forward(request, response);
+		
+	}
 }

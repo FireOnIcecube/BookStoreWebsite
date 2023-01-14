@@ -1,6 +1,7 @@
 package com.bookstore.dao;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
@@ -168,6 +169,27 @@ public class OrderDAOTest {
 	}
 
 	@Test
+	public void testGetByIdAndCustomerNull() {
+		Integer orderId = 10;
+		Integer customerId = 99;
+		
+		BookOrder order = orderDAO.get(orderId,customerId);
+		
+		assertNull(order);
+	}
+	
+	@Test
+	public void testGetByIdAndCustomerNotNull() {
+		Integer orderId = 8;
+		Integer customerId = 2;
+		
+		BookOrder order = orderDAO.get(orderId,customerId);
+		
+		assertNotNull(order);
+	}
+	
+	
+	@Test
 	public void testDeleteOrder() {
 		int orderId = 5;
 		orderDAO.delete(orderId);
@@ -196,6 +218,22 @@ public class OrderDAOTest {
 		assertTrue(listOrders.size() >0);
 	}
 
+	@Test
+	public void testListByCustomerNoOrders() {
+		Integer customerId = 99;
+		List<BookOrder> listOrders = orderDAO.listByCustomer(customerId);
+		
+		assertTrue(listOrders.isEmpty());
+	}
+	
+	@Test
+	public void testListByCustomerHaveOrders() {
+		Integer customerId = 2;
+		List<BookOrder> listOrders = orderDAO.listByCustomer(customerId);
+		
+		assertTrue(listOrders.size()>0);
+	}
+	
 	@Test
 	public void testCount() {
 		long totalOrders =orderDAO.count();

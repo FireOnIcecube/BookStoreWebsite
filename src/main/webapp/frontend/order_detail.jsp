@@ -5,34 +5,42 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Orders Details - Evergreen Bookstore Adminstration</title>
-<link rel="stylesheet" href="../css/style.css">
-		<script type="text/javascript" src="../js/jquery-3.6.3.min.js"></script>
+<title>My Orders Details - Evergreen Bookstore </title>
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 	<jsp:directive.include file="header.jsp" />
 
-	<div align="center">
-		<h2 class="pageheading">Details of Order ID: ${order.orderId }</h2>
-	</div>
 
-	<c:if test="${message !=null }">
-	
-		<div align="center">
-			<h4 class="message">${message }</h4>
+	<c:if test="${order == null }">
+		<div align ="center">
+			<h2 class="pageheading">Sorry, you are not authorized to view this order</h2>
 		</div>
-	
 	</c:if>
+
+	
+	<c:if test="${order != null }">
+	
+	<div align="center">
+		<h2 class="pageheading">Your Order ID: ${order.orderId }</h2>
+	</div>
 	
 	<div align="center">
 		<h2>Order Overview:</h2>
 		<table>
+		
 			<tr>
-				<td><b>Ordered By: </b></td>
-				<td>${order.customer.fullname }</td>
+				<td><b>Order Status: </b></td>
+				<td>${order.status }</td>
 			</tr>
+			
 			<tr>
-				<td><b>Book Copies: </b></td>
+				<td><b>Order Date: </b></td>
+				<td>${order.orderDate }</td>
+			</tr>
+			
+			<tr>
+				<td><b>Quantity: </b></td>
 				<td>${order.bookCopies }</td>
 			</tr>
 			<tr>
@@ -47,22 +55,19 @@
 				<td><b>Recipient Phone: </b></td>
 				<td>${order.recipientName }</td>
 			</tr>
+			
+			<tr>
+				<td><b>Ship to: </b></td>
+				<td>${order.shippingAddress }</td>
+			</tr>
+			
 			<tr>
 				<td><b>Payment Method: </b></td>
 				<td>${order.paymentMethod }</td>
 			</tr>
-			<tr>
-				<td><b>Shipping Address: </b></td>
-				<td>${order.shippingAddress }</td>
-			</tr>
-			<tr>
-				<td><b>Order Status: </b></td>
-				<td>${order.status }</td>
-			</tr>
-			<tr>
-				<td><b>Order Date: </b></td>
-				<td>${order.orderDate }</td>
-			</tr>
+	
+
+		
 		</table>
 	</div>
 	
@@ -85,7 +90,6 @@
 						<img style="vertical-align:middle;" src="data:image/jpg;base64,${orderDetail.book.base64Image }" width="48" height="64"/>
 						${orderDetail.book.title }
 					</td>
-					
 					<td>${orderDetail.book.author }</td>
 					<td>${orderDetail.book.price }</td>
 					<td>${orderDetail.quantity }</td>
@@ -106,40 +110,9 @@
 			
 		</table>
 	</div>
-	
-	<div align="center">
-		<br/>
-		<a href="">Edit this Order</a>
-		&nbsp;&nbsp;&nbsp;&nbsp;
-		<a href="">Delete this Order</a>
-	</div>
-	
-
-
-	
-	
-
+	</c:if>
 
 	<jsp:directive.include file='footer.jsp' />
 	
-	
-	<script>
-	
-		$(document).ready(function(){
-			$(".deleteLink").each(function(){
-				$(this).on("click",function(){
-					
-					customerId =$(this).attr("id");
-					
-					if(confirm('Are you sure you want to delete the customer with ID ' +customerId+'?')){
-						window.location.replace('delete_customer?id='+ customerId);
-						//window.location = 'delete_user';
-					}
-					
-				});
-			});
-		});
-
-	</script>
 	</body>
 </html>
