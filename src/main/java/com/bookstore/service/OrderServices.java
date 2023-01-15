@@ -185,4 +185,41 @@ public class OrderServices {
 		dispatcher.forward(request, response);
 		
 	}
+
+
+
+	public void showEditOrderForm() throws ServletException, IOException {
+		Integer orderId = Integer.parseInt(request.getParameter("id"));
+		BookOrder order =orderDAO.get(orderId);
+		String destPage ="order_form.jsp";
+		
+		
+		
+		
+		
+		if(order == null) {
+			String message = "Could not find order with ID " + orderId;
+			destPage = "message.jsp";
+			request.setAttribute("message", message);
+		}else {
+			HttpSession session =request.getSession();
+			
+			Object isPendingBook = session.getAttribute("NewBookPendingToAddToOrder");
+			
+			if(isPendingBook == null) {
+				session.setAttribute("order", order);
+			}else {
+				session.removeAttribute("NewBookPendingToAddToOrder");
+			}
+			
+			
+			
+		}
+		
+		
+		
+		RequestDispatcher dispatcher =request.getRequestDispatcher(destPage);
+		dispatcher.forward(request, response);
+		
+	}
 }
