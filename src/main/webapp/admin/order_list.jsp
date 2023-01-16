@@ -50,7 +50,7 @@
 				<td>
 					<a href="view_order?id=${order.orderId}">Details</a> &nbsp;
 					<a href="edit_order?id=${order.orderId}">Edit</a> &nbsp;
-					<a href="javascript:void(0)" class="deleteLink" id="${cat.categoryId }">Delete</a>
+					<a href="javascript:void(0)" class="deleteLink" id="${order.orderId }">Delete</a>
 				</td>
 			</tr>
 			</c:forEach>
@@ -73,10 +73,10 @@
 			$(".deleteLink").each(function(){
 				$(this).on("click",function(){
 					
-					customerId =$(this).attr("id");
+					orderId =$(this).attr("id");
 					
-					if(confirm('Are you sure you want to delete the customer with ID ' +customerId+'?')){
-						window.location.replace('delete_customer?id='+ customerId);
+					if(confirm('Are you sure you want to delete the customer with ID ' +orderId+'?')){
+						window.location.replace('delete_order?id='+ orderId);
 						//window.location = 'delete_user';
 					}
 					

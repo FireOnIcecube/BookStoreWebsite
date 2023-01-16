@@ -7,7 +7,10 @@
 <meta charset="UTF-8">
 <title>Edit Orders - Evergreen Bookstore Adminstration</title>
 <link rel="stylesheet" href="../css/style.css">
-		<script type="text/javascript" src="../js/jquery-3.6.3.min.js"></script>
+		
+<script type="text/javascript" src="../js/jquery-3.6.3.min.js"></script>
+<script type="text/javascript" src="../js/jquery.validate.min.js"></script>
+		
 </head>
 <body>
 	<jsp:directive.include file="header.jsp" />
@@ -65,11 +68,11 @@
 				<td><b>Order Status: </b></td>
 				<td>
 					<select name="orderStatus">
-						<option value="Processing">Processing</option>
-						<option value="Shipping">Shipping</option>
-						<option value="Delivered">Delivered</option>
-						<option value="Completed">Completed</option>
-						<option value="Cancelled">Cancelled</option>
+						<option value="Processing" <c:if test="${order.status == 'Processing' }">selected ='selected'</c:if>>  Processing</option>
+						<option value="Shipping" <c:if test="${order.status == 'Shipping' }">selected ='selected'</c:if>>  Shipping</option>
+						<option value="Delivered" <c:if test="${order.status == 'Delivered' }">selected ='selected'</c:if>>  Delivered</option>
+						<option value="Completed" <c:if test="${order.status == 'Completed' }">selected ='selected'</c:if>>  Completed</option>
+						<option value="Cancelled" <c:if test="${order.status == 'Cancelled' }">selected ='selected'</c:if>>  Cancelled</option>
 					</select>
 				</td>
 			</tr>
@@ -99,9 +102,13 @@
 					</td>
 					
 					<td>${orderDetail.book.author }</td>
-					<td>${orderDetail.book.price }</td>
 					<td>
-						<input type="text" name="quantity" value="${orderDetail.quantity }" size="5" />
+						<input type="hidden" name="price" value="${orderDetail.book.price }"/>
+						<fmt:formatNumber value='${orderDetail.book.price }' type="currency" />
+					</td>
+					<td>
+						<input type="hidden" name="bookId" value="${orderDetail.book.bookId }"/>
+ 						<input type="text" name="quantity${status.index + 1 }" value="${orderDetail.quantity }" size="5" />
 					</td>
 					<td><fmt:formatNumber value="${orderDetail.subtotal}" type="currency" /> </td>
 					
@@ -154,7 +161,38 @@
 					'width='+ width + ', height='+ height +', top=' + top + ', left=' + left);
 		}
 		
-		
+		$(document).ready(function(){
+			$("#orderForm").validate({
+				rules:{
+					recipientName:"required",
+					recipientPhone:"required",
+					shippingAddress:"required",
+					
+					<c:forEach items="${order.orderDetails}" var="book" varStatus="status">
+						quantity${status.index + 1}:{
+							required:true,number: true,min: 1
+						},
+						
+					</c:forEach>
+				},
+				
+				messages:{
+					recipientName:"Please enter recipient name",
+					recipientPhone:"Please enter recipient phone",
+					shippingAddress:"Please enter shipping address",
+					
+					<c:forEach items="${order.orderDetails}" var="book" varStatus="status">
+						quantity${status.index + 1}:{
+							required:"Please enter quantity",
+							number: "Quantity must be a number",
+							min: "Quantity must be greater than 0"
+						},
+				
+					</c:forEach>
+				}
+				
+			});
+		});
 	</script>
 	</body>
 </html>
