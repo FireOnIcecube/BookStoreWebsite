@@ -1,6 +1,7 @@
 package com.bookstore.service;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -20,7 +21,10 @@ public class UserServices {
 	private HttpServletRequest request;
 	private HttpServletResponse response;
 
-	public UserServices(HttpServletRequest request, HttpServletResponse response) {
+	public UserServices(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		
 		this.request = request;
 		this.response = response;
 

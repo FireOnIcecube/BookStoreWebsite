@@ -22,6 +22,7 @@ public class CustomerServices {
 	public CustomerServices(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
 		super();
 		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		this.request = request;
 		this.response = response;
 		this.customerDAO = new CustomerDAO();

@@ -1,6 +1,7 @@
 package com.bookstore.service;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -12,14 +13,19 @@ import com.bookstore.dao.ReviewDAO;
 import com.bookstore.entity.Review;
 
 public class ReviewServices {
+	
 	private ReviewDAO reviewDAO;
+	
 	private HttpServletRequest request;
 	private HttpServletResponse response;
 	
-	public ReviewServices(HttpServletRequest request, HttpServletResponse response) {
+	public ReviewServices(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
 		super();
+		
 		this.request = request;
 		this.response = response;
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		this.reviewDAO = new ReviewDAO();
 	}
 	

@@ -2,6 +2,7 @@ package com.bookstore.service;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -31,8 +32,10 @@ public class BookServices {
 	
 	
 	public BookServices( HttpServletRequest request,
-			HttpServletResponse response) {
+			HttpServletResponse response) throws UnsupportedEncodingException {
 		
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		this.bookDAO = new BookDAO();
 		this.categoryDAO = new CategoryDAO();
 		this.request = request;

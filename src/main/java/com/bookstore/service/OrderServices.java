@@ -1,6 +1,7 @@
 package com.bookstore.service;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -28,7 +29,9 @@ public class OrderServices {
 	
 	
 	
-	public OrderServices(HttpServletRequest request, HttpServletResponse response) {
+	public OrderServices(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		this.request = request;
 		this.response = response;
 		this.orderDAO = new OrderDAO();
